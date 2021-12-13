@@ -17,6 +17,12 @@ token = {
 
 }
 
+refreshToken(){
+  this.token = {
+    headers: new HttpHeaders().set("Authorization", environment.token)
+  }
+} 
+
 getAllTema(): Observable<tema[]>{
   return this.http.get<tema[]>("https://blogpessoalcami.herokuapp.com/tema", this.token)
 

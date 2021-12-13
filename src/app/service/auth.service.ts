@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { Observable } from 'rxjs';
@@ -16,6 +16,19 @@ export class AuthService {
     private http: HttpClient
   ) { }
 
+  
+token = {
+
+  headers: new HttpHeaders().set("Authorization", environment.token)
+
+}
+
+refreshToken(){
+  this.token = {
+    headers: new HttpHeaders().set("Authorization", environment.token)
+  }
+} 
+
   entrar(userLogin: userLogin): Observable<userLogin>{
     return this.http.post<userLogin>("https://blogpessoalcami.herokuapp.com/usuarios/logar", userLogin)
   
@@ -26,6 +39,11 @@ export class AuthService {
     //https://blogpessoalcami.herokuapp.com/usuarios/logar
     //http://localhost:8080/usuarios/logar
     //http://localhost:8080/usuarios/cadastrar
+  }
+
+  getByIdUsuario(id:number): Observable<usuario>{
+    return this.http.get<usuario>(`https://blogpessoalcami.herokuapp.com/usuarios/${id}`, this.token)
+
   }
 
 

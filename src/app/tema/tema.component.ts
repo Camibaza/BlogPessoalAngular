@@ -29,7 +29,7 @@ if(environment.token ==""){
   this.router.navigate(["/entrar"])
 
 }
-
+this.temaService.refreshToken()
 this.findAllTemas()
   
 
